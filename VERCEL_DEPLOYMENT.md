@@ -87,7 +87,8 @@ The IAEF project consists of two main components:
       "src": "app/main.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "50mb"
+        "maxLambdaSize": "50mb",
+        "maxDuration": 30
       }
     }
   ],
@@ -104,11 +105,6 @@ The IAEF project consists of two main components:
     "ALGORITHM": "HS256",
     "ACCESS_TOKEN_EXPIRE_MINUTES": "30",
     "ALLOWED_ORIGINS": "https://your-frontend-domain.vercel.app,http://localhost:3000"
-  },
-  "functions": {
-    "app/main.py": {
-      "maxDuration": 30
-    }
   }
 }
 ```
