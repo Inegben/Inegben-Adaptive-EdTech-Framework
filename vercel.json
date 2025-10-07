@@ -3,18 +3,7 @@
   "builds": [
     {
       "src": "backend/app/main.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb",
-        "maxDuration": 30
-      }
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/build"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -24,12 +13,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/build/$1"
+      "dest": "/index.html"
     }
-  ],
-  "env": {
-    "PYTHONPATH": "backend",
-    "ALGORITHM": "HS256",
-    "ACCESS_TOKEN_EXPIRE_MINUTES": "30"
-  }
+  ]
 }

@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
-    # CORS
+    # CORS - Handle Vercel environment
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://localhost:3001",
@@ -31,5 +31,17 @@ class Settings(BaseSettings):
     
     class Config:
         env_file = ".env"
+        case_sensitive = True
 
+# Create settings instance
 settings = Settings()
+
+# Override with environment variables for Vercel
+if os.getenv("DATABASE_URL"):
+    settings.DATABASE_URL = os.getenv("DATABASE_URL")
+
+if os.getenv("SECRET_KEY"):
+    settings.SECRET_KEY = os.getenv("SECRET_KEY")
+
+if os.getenv("ALLOWED_ORIGINS"):
+    settings.ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS").split(",")

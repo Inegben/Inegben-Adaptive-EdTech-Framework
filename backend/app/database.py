@@ -2,8 +2,19 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
+import os
 
-engine = create_engine(settings.DATABASE_URL)
+# Handle Vercel serverless environment
+DATABASE_URL = os.getenv("DATABASE_URL", settings.DATABASE_URL)
+
+# Create engine with connection pooling for serverless
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    pool_recycle=300,
+    connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
+)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
