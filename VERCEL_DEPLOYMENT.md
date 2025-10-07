@@ -16,6 +16,8 @@ The IAEF project consists of two main components:
 
 ## 🚀 Deployment Steps
 
+**Recommended Approach**: Deploy frontend and backend as separate Vercel projects for better performance and easier management.
+
 ### Step 1: Backend Deployment
 
 1. **Connect Repository to Vercel**:
@@ -83,6 +85,7 @@ The IAEF project consists of two main components:
    - **Root Directory**: `frontend`
    - **Build Command**: `npm run build`
    - **Output Directory**: `build`
+   - **Install Command**: `npm install` (optional, auto-detected)
 
 3. **Environment Variables Setup**:
    
