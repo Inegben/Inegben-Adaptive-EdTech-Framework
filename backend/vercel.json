@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app/main.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app/main.py"
+    }
+  ],
+  "env": {
+    "PYTHONPATH": ".",
+    "DATABASE_URL": "@database_url",
+    "SECRET_KEY": "@secret_key",
+    "ALGORITHM": "HS256",
+    "ACCESS_TOKEN_EXPIRE_MINUTES": "30",
+    "ALLOWED_ORIGINS": "https://your-frontend-domain.vercel.app,http://localhost:3000"
+  },
+  "functions": {
+    "app/main.py": {
+      "maxDuration": 30
+    }
+  }
+}
