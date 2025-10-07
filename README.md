@@ -222,13 +222,22 @@ IAEF/
 ## 🚀 Deployment
 
 ### Vercel Deployment (Recommended)
-For easy deployment to Vercel, see the comprehensive guide: [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)
+For easy deployment to Vercel, see the comprehensive guide: [VERCEL_DEPLOYMENT_COMPLETE.md](VERCEL_DEPLOYMENT_COMPLETE.md)
 
 **Quick Vercel Setup:**
 1. **Backend**: Deploy as serverless function with `backend/vercel.json`
 2. **Frontend**: Deploy as static site with `frontend/vercel.json`
 3. **Database**: Use Vercel Postgres or external PostgreSQL
 4. **Environment Variables**: Configure in Vercel dashboard
+
+### Netlify Deployment (Alternative)
+For Netlify deployment, see the comprehensive guide: [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md)
+
+**Quick Netlify Setup:**
+1. **Frontend**: Deploy as static site with `netlify.toml`
+2. **Backend**: Deploy as serverless functions with `netlify/functions/`
+3. **Database**: Use Supabase, PlanetScale, or Railway PostgreSQL
+4. **Environment Variables**: Configure in Netlify dashboard
 
 ### Traditional Deployment
 
