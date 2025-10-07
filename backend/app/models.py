@@ -98,7 +98,7 @@ class ContentInteraction(Base):
     format_used = Column(String, nullable=False)  # video, audio, text, interactive
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
     duration_seconds = Column(Integer, default=0)
-    metadata = Column(JSON, default=dict)  # Additional interaction data
+    interaction_metadata = Column(JSON, default=dict)  # Additional interaction data
     
     # Relationships
     user = relationship("User", back_populates="content_interactions")

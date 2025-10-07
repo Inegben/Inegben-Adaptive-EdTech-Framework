@@ -139,7 +139,7 @@ async def record_content_interaction(
         interaction_type=interaction.interaction_type,
         format_used=interaction.format_used,
         duration_seconds=interaction.duration_seconds,
-        metadata=interaction.metadata
+        interaction_metadata=interaction.interaction_metadata
     )
     
     db.add(db_interaction)

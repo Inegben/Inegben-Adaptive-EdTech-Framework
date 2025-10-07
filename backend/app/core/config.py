@@ -1,10 +1,10 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from typing import List
 import os
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql://user:password@localhost/iaef_db"
+    DATABASE_URL: str = "sqlite:///./iaef_demo.db"
     
     # Security
     SECRET_KEY: str = "your-secret-key-change-in-production"

@@ -111,7 +111,7 @@ class ContentInteraction(BaseModel):
     interaction_type: str
     format_used: str
     duration_seconds: int = 0
-    metadata: Dict[str, Any] = {}
+    interaction_metadata: Dict[str, Any] = {}
 
 class InteractionCreate(ContentInteraction):
     content_id: int

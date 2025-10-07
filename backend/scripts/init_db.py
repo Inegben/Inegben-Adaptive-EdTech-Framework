@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 from app.database import engine, Base
 from app.models import User, AssessmentQuestion, Content
 from app.core.config import settings
-from passlib.context import CryptContext
+import hashlib
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -21,11 +21,9 @@ Base.metadata.create_all(bind=engine)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 db = SessionLocal()
 
-# Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
+# Simple password hashing for demo
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def create_sample_users():
     """Create sample users for testing"""
@@ -40,7 +38,7 @@ def create_sample_users():
         {
             "email": "alex@example.com",
             "username": "alex_student",
-            "password": "password123",
+            "password": "pass123",
             "learning_style": "visual",
             "assessment_completed": True,
             "assessment_score": {"visual": 7, "auditory": 2, "kinesthetic": 1}
@@ -48,7 +46,7 @@ def create_sample_users():
         {
             "email": "sarah@example.com", 
             "username": "sarah_professional",
-            "password": "password123",
+            "password": "pass123",
             "learning_style": "auditory",
             "assessment_completed": True,
             "assessment_score": {"visual": 2, "auditory": 7, "kinesthetic": 1}
@@ -56,7 +54,7 @@ def create_sample_users():
         {
             "email": "mike@example.com",
             "username": "mike_learner", 
-            "password": "password123",
+            "password": "pass123",
             "learning_style": "kinesthetic",
             "assessment_completed": True,
             "assessment_score": {"visual": 1, "auditory": 2, "kinesthetic": 7}
