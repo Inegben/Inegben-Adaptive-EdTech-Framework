@@ -221,23 +221,84 @@ IAEF/
 
 ## 🚀 Deployment
 
-### Vercel Deployment (Recommended)
-For easy deployment to Vercel, see the comprehensive guide: [VERCEL_DEPLOYMENT_COMPLETE.md](VERCEL_DEPLOYMENT_COMPLETE.md)
+The IAEF application supports multiple deployment platforms. Choose the one that best fits your needs:
 
-**Quick Vercel Setup:**
+### 🌟 Platform Comparison
+
+| Feature | Vercel | Netlify |
+|---------|--------|---------|
+| **Frontend Hosting** | ✅ Static Site | ✅ Static Site |
+| **Backend Functions** | ✅ Python/FastAPI | ✅ Python/FastAPI |
+| **Database Integration** | ✅ Vercel Postgres | ✅ External DBs |
+| **Build Process** | ✅ Auto-detected | ✅ Configurable |
+| **Custom Domains** | ✅ Free | ✅ Free |
+| **Preview Deployments** | ✅ Automatic | ✅ Automatic |
+| **Cold Start Performance** | ✅ Fast | ✅ Fast |
+
+### 🚀 Vercel Deployment (Recommended)
+
+**Best for**: Integrated database solutions and automatic deployments
+
+📖 **Complete Guide**: [VERCEL_DEPLOYMENT_COMPLETE.md](VERCEL_DEPLOYMENT_COMPLETE.md)
+
+**Quick Setup:**
 1. **Backend**: Deploy as serverless function with `backend/vercel.json`
 2. **Frontend**: Deploy as static site with `frontend/vercel.json`
 3. **Database**: Use Vercel Postgres or external PostgreSQL
 4. **Environment Variables**: Configure in Vercel dashboard
 
-### Netlify Deployment (Alternative)
-For Netlify deployment, see the comprehensive guide: [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md)
+**Advantages:**
+- ✅ Integrated Vercel Postgres database
+- ✅ Automatic framework detection
+- ✅ Excellent Python serverless support
+- ✅ Built-in analytics and monitoring
 
-**Quick Netlify Setup:**
+### 🌐 Netlify Deployment (Alternative)
+
+**Best for**: Custom build processes and external database services
+
+📖 **Complete Guide**: [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md)
+
+**Quick Setup:**
 1. **Frontend**: Deploy as static site with `netlify.toml`
 2. **Backend**: Deploy as serverless functions with `netlify/functions/`
 3. **Database**: Use Supabase, PlanetScale, or Railway PostgreSQL
 4. **Environment Variables**: Configure in Netlify dashboard
+
+**Advantages:**
+- ✅ Flexible build configuration
+- ✅ Excellent external database support
+- ✅ Advanced form handling
+- ✅ Built-in A/B testing
+- ✅ Edge functions support
+
+### 🎯 One-Click Deploy
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Inegben/Inegben-Adaptive-EdTech-Framework)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Inegben/Inegben-Adaptive-EdTech-Framework)
+
+### 📁 Deployment Configuration Files
+
+The repository includes all necessary configuration files for both platforms:
+
+#### Vercel Configuration
+- `vercel.json` - Root monorepo configuration
+- `backend/vercel.json` - Backend serverless function config
+- `frontend/vercel.json` - Frontend static site config
+- `backend/requirements.txt` - Python dependencies
+
+#### Netlify Configuration
+- `netlify.toml` - Main Netlify configuration
+- `netlify/functions/api.py` - FastAPI adapter for Netlify Functions
+- `netlify/functions/requirements.txt` - Serverless dependencies
+- `backend/netlify_config.py` - Netlify-specific settings
+- `backend/app/netlify_main.py` - Optimized FastAPI app
+
+#### Frontend Configuration
+- `frontend/package.json` - Node.js dependencies and scripts
+- `frontend/src/config/api.js` - Centralized API configuration
+- `frontend/.env.example` - Environment variable template
 
 ### Traditional Deployment
 
