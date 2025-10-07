@@ -29,17 +29,43 @@ The IAEF project consists of two main components:
    - **Build Command**: `pip install -r requirements-vercel.txt`
    - **Output Directory**: Leave empty (serverless function)
 
-3. **Environment Variables**:
-   Go to your project settings in Vercel dashboard and add these environment variables:
-   ```
-   DATABASE_URL = postgresql://username:password@host:port/database
-   SECRET_KEY = your-super-secret-key-here
-   ALGORITHM = HS256
-   ACCESS_TOKEN_EXPIRE_MINUTES = 30
-   ALLOWED_ORIGINS = https://your-frontend-domain.vercel.app
-   ```
+3. **Environment Variables Setup**:
    
-   **Important**: Set these as regular environment variables, NOT as secrets.
+   **Step-by-Step Instructions:**
+   
+   a) **Navigate to Project Settings**:
+      - Go to your Vercel project dashboard
+      - Click on the "Settings" tab
+      - Select "Environment Variables" from the left sidebar
+   
+   b) **Add Each Environment Variable**:
+      Click "Add New" for each variable below:
+      
+      | Variable Name | Value | Environment |
+      |---------------|-------|-------------|
+      | `DATABASE_URL` | `postgresql://username:password@host:port/database` | Production, Preview, Development |
+      | `SECRET_KEY` | `your-super-secret-key-here` | Production, Preview, Development |
+      | `ALGORITHM` | `HS256` | Production, Preview, Development |
+      | `ACCESS_TOKEN_EXPIRE_MINUTES` | `30` | Production, Preview, Development |
+      | `ALLOWED_ORIGINS` | `https://your-frontend-domain.vercel.app` | Production, Preview, Development |
+   
+   c) **Important Notes**:
+      - ✅ **DO**: Set these as regular environment variables
+      - ❌ **DON'T**: Use the "Secrets" section or `@variable` syntax
+      - 🔒 **Security**: Use strong, unique values for `SECRET_KEY`
+      - 🌍 **Environments**: Enable for Production, Preview, and Development
+   
+   d) **Database URL Examples**:
+      ```
+      # Vercel Postgres
+      postgres://default:password@ep-xxx.us-east-1.postgres.vercel-storage.com/verceldb
+      
+      # Supabase
+      postgresql://postgres:password@db.xxx.supabase.co:5432/postgres
+      
+      # PlanetScale
+      mysql://username:password@aws.connect.psdb.cloud/database?sslaccept=strict
+      ```
 
 4. **Deploy Backend**:
    - Click "Deploy"
@@ -58,11 +84,27 @@ The IAEF project consists of two main components:
    - **Build Command**: `npm run build`
    - **Output Directory**: `build`
 
-3. **Environment Variables**:
-   Go to your project settings in Vercel dashboard and add this environment variable:
-   ```
-   REACT_APP_API_URL = https://iaef-backend.vercel.app
-   ```
+3. **Environment Variables Setup**:
+   
+   **Step-by-Step Instructions:**
+   
+   a) **Navigate to Project Settings**:
+      - Go to your Vercel project dashboard
+      - Click on the "Settings" tab
+      - Select "Environment Variables" from the left sidebar
+   
+   b) **Add Environment Variable**:
+      Click "Add New" and enter:
+      
+      | Variable Name | Value | Environment |
+      |---------------|-------|-------------|
+      | `REACT_APP_API_URL` | `https://iaef-backend.vercel.app` | Production, Preview, Development |
+   
+   c) **Important Notes**:
+      - ✅ **DO**: Set as regular environment variable
+      - ❌ **DON'T**: Use secrets or `@variable` syntax
+      - 🔄 **Update**: Replace with your actual backend URL after deployment
+      - 🌍 **Environments**: Enable for all environments
 
 4. **Deploy Frontend**:
    - Click "Deploy"
@@ -152,41 +194,73 @@ The IAEF project consists of two main components:
 ## 🔐 Security Considerations
 
 1. **Environment Variables**:
-   - Never commit secrets to Git
-   - Use Vercel's environment variable system
-   - Rotate secrets regularly
+   - ✅ **DO**: Use Vercel's environment variable system
+   - ✅ **DO**: Set strong, unique values for `SECRET_KEY`
+   - ✅ **DO**: Enable variables for appropriate environments only
+   - ❌ **DON'T**: Commit secrets to Git
+   - ❌ **DON'T**: Use the same secrets across projects
+   - ❌ **DON'T**: Use `@variable` syntax (causes deployment errors)
 
-2. **CORS Configuration**:
+2. **Environment Variable Best Practices**:
+   ```
+   # ✅ CORRECT: Regular environment variables
+   DATABASE_URL = postgresql://user:pass@host:port/db
+   SECRET_KEY = your-256-bit-secret-key-here
+   
+   # ❌ WRONG: Secret references (causes errors)
+   DATABASE_URL = @database_url
+   SECRET_KEY = @secret_key
+   ```
+
+3. **CORS Configuration**:
    - Only allow your frontend domain
    - Remove localhost origins in production
+   - Use exact URLs, not wildcards
 
-3. **Database Security**:
+4. **Database Security**:
    - Use connection pooling
    - Enable SSL connections
    - Regular backups
+   - Rotate database credentials regularly
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Build Failures**:
+1. **Environment Variable Errors**:
+   - ❌ **Error**: "Secret does not exist" or "Environment Variable references Secret"
+   - ✅ **Solution**: Use regular environment variables, NOT secrets
+   - ❌ **Error**: `@database_url` or `@secret_key` syntax errors
+   - ✅ **Solution**: Remove `@` prefix, use direct values
+   - ❌ **Error**: Variables not available in function
+   - ✅ **Solution**: Ensure variables are enabled for Production, Preview, and Development
+
+2. **Build Failures**:
    - Check Python version compatibility
    - Verify all dependencies in `requirements-vercel.txt`
    - Check build logs in Vercel dashboard
+   - Ensure environment variables are set before build
 
-2. **CORS Errors**:
+3. **CORS Errors**:
    - Verify `ALLOWED_ORIGINS` includes your frontend URL
    - Check browser developer tools for specific errors
+   - Ensure no trailing slashes in URLs
 
-3. **Database Connection Issues**:
-   - Verify `DATABASE_URL` format
+4. **Database Connection Issues**:
+   - Verify `DATABASE_URL` format and credentials
    - Check database accessibility from Vercel
    - Ensure SSL is enabled if required
+   - Test connection string locally first
 
-4. **Function Timeout**:
+5. **Function Timeout**:
    - Increase `maxDuration` in `vercel.json`
    - Optimize database queries
    - Consider caching strategies
+
+6. **Authentication Issues**:
+   - Verify `SECRET_KEY` is set and strong
+   - Check JWT token expiration settings
+   - Ensure `ALGORITHM` matches your code
 
 ### Debugging Steps
 
@@ -236,6 +310,34 @@ The IAEF project consists of two main components:
 - [FastAPI on Vercel](https://vercel.com/docs/functions/serverless-functions/runtimes/python)
 - [React on Vercel](https://vercel.com/docs/frameworks/react)
 - [PostgreSQL on Vercel](https://vercel.com/docs/storage/vercel-postgres)
+
+## 🚀 Quick Reference
+
+### Environment Variables Checklist
+- [ ] `DATABASE_URL` - Database connection string
+- [ ] `SECRET_KEY` - Strong secret for JWT tokens
+- [ ] `ALGORITHM` - JWT algorithm (HS256)
+- [ ] `ACCESS_TOKEN_EXPIRE_MINUTES` - Token expiration time
+- [ ] `ALLOWED_ORIGINS` - Frontend domain for CORS
+- [ ] `REACT_APP_API_URL` - Backend API URL (frontend only)
+
+### Common Commands
+```bash
+# Check deployment status
+vercel ls
+
+# View deployment logs
+vercel logs [deployment-url]
+
+# Redeploy with environment variables
+vercel --prod
+```
+
+### Configuration Files
+- `vercel.json` - Root configuration (monorepo)
+- `backend/vercel.json` - Backend-specific config
+- `frontend/vercel.json` - Frontend-specific config
+- `backend/requirements-vercel.txt` - Python dependencies
 
 ---
 
