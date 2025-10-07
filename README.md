@@ -221,13 +221,24 @@ IAEF/
 
 ## 🚀 Deployment
 
-### Backend Deployment
+### Vercel Deployment (Recommended)
+For easy deployment to Vercel, see the comprehensive guide: [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)
+
+**Quick Vercel Setup:**
+1. **Backend**: Deploy as serverless function with `backend/vercel.json`
+2. **Frontend**: Deploy as static site with `frontend/vercel.json`
+3. **Database**: Use Vercel Postgres or external PostgreSQL
+4. **Environment Variables**: Configure in Vercel dashboard
+
+### Traditional Deployment
+
+#### Backend Deployment
 1. Set up PostgreSQL database
 2. Configure environment variables
 3. Run database migrations: `alembic upgrade head`
 4. Deploy with gunicorn or similar WSGI server
 
-### Frontend Deployment
+#### Frontend Deployment
 1. Build the application: `npm run build`
 2. Serve static files with nginx or similar
 3. Configure API endpoint URLs
