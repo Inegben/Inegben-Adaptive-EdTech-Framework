@@ -30,14 +30,16 @@ The IAEF project consists of two main components:
    - **Output Directory**: Leave empty (serverless function)
 
 3. **Environment Variables**:
-   Set the following environment variables in Vercel:
+   Go to your project settings in Vercel dashboard and add these environment variables:
    ```
-   DATABASE_URL=postgresql://username:password@host:port/database
-   SECRET_KEY=your-super-secret-key-here
-   ALGORITHM=HS256
-   ACCESS_TOKEN_EXPIRE_MINUTES=30
-   ALLOWED_ORIGINS=https://your-frontend-domain.vercel.app
+   DATABASE_URL = postgresql://username:password@host:port/database
+   SECRET_KEY = your-super-secret-key-here
+   ALGORITHM = HS256
+   ACCESS_TOKEN_EXPIRE_MINUTES = 30
+   ALLOWED_ORIGINS = https://your-frontend-domain.vercel.app
    ```
+   
+   **Important**: Set these as regular environment variables, NOT as secrets.
 
 4. **Deploy Backend**:
    - Click "Deploy"
@@ -57,9 +59,9 @@ The IAEF project consists of two main components:
    - **Output Directory**: `build`
 
 3. **Environment Variables**:
-   Set the following environment variable:
+   Go to your project settings in Vercel dashboard and add this environment variable:
    ```
-   REACT_APP_API_URL=https://iaef-backend.vercel.app
+   REACT_APP_API_URL = https://iaef-backend.vercel.app
    ```
 
 4. **Deploy Frontend**:
