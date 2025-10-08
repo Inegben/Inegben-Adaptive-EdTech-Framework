@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext';
 import ReactPlayer from 'react-player';
 
 const ContentView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { } = useAuth();
   
   const [content, setContent] = useState(null);
   const [adaptiveData, setAdaptiveData] = useState(null);
@@ -16,17 +14,6 @@ const ContentView = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
-
-  useEffect(() => {
-    fetchContent();
-    fetchProgress();
-  }, [id, fetchContent, fetchProgress]);
-
-  useEffect(() => {
-    if (content) {
-      fetchAdaptiveContent();
-    }
-  }, [content, fetchAdaptiveContent]);
 
   const fetchContent = useCallback(async () => {
     try {
@@ -60,6 +47,17 @@ const ContentView = () => {
       console.error('Failed to fetch progress:', error);
     }
   }, [id]);
+
+  useEffect(() => {
+    fetchContent();
+    fetchProgress();
+  }, [id, fetchContent, fetchProgress]);
+
+  useEffect(() => {
+    if (content) {
+      fetchAdaptiveContent();
+    }
+  }, [content, fetchAdaptiveContent]);
 
   const updateProgress = async (progressData) => {
     try {
