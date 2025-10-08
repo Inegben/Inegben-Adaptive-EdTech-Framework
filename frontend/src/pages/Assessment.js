@@ -11,7 +11,7 @@ const Assessment = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   
-  const { user, updateUser } = useAuth();
+  const { updateUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

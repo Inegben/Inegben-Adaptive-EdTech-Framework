@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player';
 const ContentView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { } = useAuth();
   
   const [content, setContent] = useState(null);
   const [adaptiveData, setAdaptiveData] = useState(null);
@@ -20,15 +20,15 @@ const ContentView = () => {
   useEffect(() => {
     fetchContent();
     fetchProgress();
-  }, [id]);
+  }, [id, fetchContent, fetchProgress]);
 
   useEffect(() => {
     if (content) {
       fetchAdaptiveContent();
     }
-  }, [content]);
+  }, [content, fetchAdaptiveContent]);
 
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
     try {
       const response = await axios.get(`/api/v1/content/${id}`);
       setContent(response.data);
@@ -37,9 +37,9 @@ const ContentView = () => {
       setError('Failed to load content');
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  const fetchAdaptiveContent = async () => {
+  const fetchAdaptiveContent = useCallback(async () => {
     try {
       const response = await axios.get(`/api/v1/content/${id}/adaptive`);
       setAdaptiveData(response.data);
@@ -50,16 +50,16 @@ const ContentView = () => {
       setError('Failed to load adaptive content');
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  const fetchProgress = async () => {
+  const fetchProgress = useCallback(async () => {
     try {
       const response = await axios.get(`/api/v1/content/${id}/progress`);
       setProgress(response.data);
     } catch (error) {
       console.error('Failed to fetch progress:', error);
     }
-  };
+  }, [id]);
 
   const updateProgress = async (progressData) => {
     try {

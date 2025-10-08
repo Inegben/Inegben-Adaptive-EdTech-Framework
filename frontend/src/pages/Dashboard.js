@@ -47,14 +47,6 @@ const Dashboard = () => {
     }
   };
 
-  const getLearningStyleColor = (style) => {
-    switch (style) {
-      case 'visual': return '#3b82f6';
-      case 'auditory': return '#10b981';
-      case 'kinesthetic': return '#f59e0b';
-      default: return '#64748b';
-    }
-  };
 
   if (loading) {
     return (
@@ -66,7 +58,6 @@ const Dashboard = () => {
   }
 
   const successMessage = location.state?.message;
-  const learningStyle = location.state?.learningStyle || user?.learning_style;
 
   return (
     <div className="dashboard-container">
