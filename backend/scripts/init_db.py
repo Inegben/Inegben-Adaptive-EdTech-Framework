@@ -38,7 +38,7 @@ def create_sample_users():
         {
             "email": "alex@example.com",
             "username": "alex_student",
-            "password": "pass123",
+            "password": "password123",
             "learning_style": "visual",
             "assessment_completed": True,
             "assessment_score": {"visual": 7, "auditory": 2, "kinesthetic": 1}
@@ -46,7 +46,7 @@ def create_sample_users():
         {
             "email": "sarah@example.com", 
             "username": "sarah_professional",
-            "password": "pass123",
+            "password": "password123",
             "learning_style": "auditory",
             "assessment_completed": True,
             "assessment_score": {"visual": 2, "auditory": 7, "kinesthetic": 1}
@@ -54,7 +54,7 @@ def create_sample_users():
         {
             "email": "mike@example.com",
             "username": "mike_learner", 
-            "password": "pass123",
+            "password": "password123",
             "learning_style": "kinesthetic",
             "assessment_completed": True,
             "assessment_score": {"visual": 1, "auditory": 2, "kinesthetic": 7}
