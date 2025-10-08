@@ -8,10 +8,16 @@
   NODE_VERSION = "18"
   NPM_VERSION = "9"
 
-# Redirect all API calls to unified function
+# Test function route
+[[redirects]]
+  from = "/test-function"
+  to = "/.netlify/functions/test"
+  status = 200
+
+# Redirect all API calls to simple function
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api"
+  to = "/.netlify/functions/simple-api"
   status = 200
 
 # Handle client-side routing
