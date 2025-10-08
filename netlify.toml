@@ -11,13 +11,13 @@
 # Test function route
 [[redirects]]
   from = "/test-function"
-  to = "/.netlify/functions/test"
+  to = "/.netlify/functions/api"
   status = 200
 
-# Redirect all API calls to simple function
+# Redirect all API calls to JavaScript function
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/simple-api"
+  to = "/.netlify/functions/api"
   status = 200
 
 # Handle client-side routing
