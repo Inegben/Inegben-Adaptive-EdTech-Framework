@@ -1,17 +1,32 @@
 [build]
   # Frontend build settings
   base = "frontend"
-  publish = "build"
+  publish = "frontend/build"
   command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
 
-# Redirect all API calls to Netlify Functions
+# Redirect API calls to specific Netlify Functions
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/api/v1/users/*"
+  to = "/.netlify/functions/auth"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/assessment/*"
+  to = "/.netlify/functions/assessment"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/content/*"
+  to = "/.netlify/functions/content"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/analytics/*"
+  to = "/.netlify/functions/content"
   status = 200
 
 # Handle client-side routing
