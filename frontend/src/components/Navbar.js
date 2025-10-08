@@ -1,8 +1,9 @@
 import * as React from 'react';
-const { useState } = React;
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
+
+const { useState } = React;
 
 const Navbar = () => {
   const { user, logout } = useAuth();
