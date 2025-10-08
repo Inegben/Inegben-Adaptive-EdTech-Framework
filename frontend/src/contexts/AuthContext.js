@@ -48,9 +48,15 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
+      console.log('Attempting login for:', email);
+      console.log('API URL:', '/api/v1/users/login');
+      
       const response = await axios.post('/api/v1/users/login', null, {
         params: { email, password }
       });
+      
+      console.log('Login response:', response);
+      console.log('Response data:', response.data);
       
       const { access_token, user: userData } = response.data;
       
@@ -58,31 +64,48 @@ export const AuthProvider = ({ children }) => {
       setToken(access_token);
       setUser(userData);
       
+      console.log('Login successful for:', email);
       return { success: true };
     } catch (error) {
       console.error('Login failed:', error);
+      console.error('Error response:', error.response);
+      console.error('Error status:', error.response?.status);
+      console.error('Error data:', error.response?.data);
+      console.error('Error message:', error.message);
+      
       return { 
         success: false, 
-        error: error.response?.data?.detail || 'Login failed' 
+        error: error.response?.data?.detail || error.message || 'Login failed' 
       };
     }
   };
 
   const register = async (email, username, password) => {
     try {
-      await axios.post('/api/v1/users/register', {
+      console.log('Attempting registration for:', email);
+      console.log('API URL:', '/api/v1/users/register');
+      
+      const response = await axios.post('/api/v1/users/register', {
         email,
         username,
         password
       });
       
+      console.log('Registration response:', response);
+      console.log('Registration data:', response.data);
+      
       // Auto-login after registration
       return await login(email, password);
     } catch (error) {
       console.error('Registration failed:', error);
+      console.error('Error response:', error.response);
+      console.error('Error status:', error.response?.status);
+      console.error('Error data:', error.response?.data);
+      console.error('Error message:', error.message);
+      
       return { 
         success: false, 
-        error: error.response?.data?.detail || 'Registration failed' 
+        error: error.response?.data?.detail || error.message || 'Registration failed' 
       };
     }
   };

@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Assessment from './pages/Assessment';
 import Dashboard from './pages/Dashboard';
 import ContentView from './pages/ContentView';
+import ApiTest from './components/ApiTest';
 import './App.css';
 
 // Protected Route Component
@@ -88,6 +89,10 @@ function App() {
                     <ContentView />
                   </ProtectedRoute>
                 } 
+              />
+              <Route 
+                path="/api-test" 
+                element={<ApiTest />} 
               />
             </Routes>
           </main>
